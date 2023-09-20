@@ -10,12 +10,26 @@ global error error
 global message message
 end forward
 
+global variables
+n_pbupdater gn_pbupdater
+end variables
 global type version_manager from application
 string appname = "version_manager"
-long richtextedittype = 2
-long richtexteditversion = 1
+string themepath = "C:\Program Files (x86)\Appeon\PowerBuilder 22.0\IDE\theme"
+string themename = "Do Not Use Themes"
+boolean nativepdfvalid = false
+boolean nativepdfincludecustomfont = false
+string nativepdfappname = ""
+long richtextedittype = 5
+long richtexteditx64type = 5
+long richtexteditversion = 3
 string richtexteditkey = ""
-string appruntimeversion = "22.0.0.1892"
+string appicon = "vm_ico.ico"
+string appruntimeversion = "22.1.0.2819"
+boolean manualsession = false
+boolean unsupportedapierror = false
+boolean bignoreservercertificate = false
+uint ignoreservercertificate = 0
 end type
 global version_manager version_manager
 
@@ -36,6 +50,16 @@ destroy(error)
 destroy(message)
 end on
 
-event open;openwithparm(w_main, commandline)
+event open;// create updater object
+gn_pbupdater = Create n_pbupdater
+
+openwithparm(w_main, commandline)
+end event
+
+event close;// run update script if exists
+gn_pbupdater.of_RunScript()
+
+// destroy the updater object
+Destroy gn_pbupdater
 end event
 

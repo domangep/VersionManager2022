@@ -246,8 +246,8 @@ JSONPackage	ijson_pkg
 JSONParser		ijson_psr
 str_proxy			istr_proxy
 
+Boolean ib_pbupdater
 end variables
-
 forward prototypes
 public function integer of_select_repository_file ()
 public function integer of_populate_application_list ()
